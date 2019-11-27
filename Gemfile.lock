@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sidekiq-metrics (0.0.1)
+    sidekiq-metrics (0.1.0)
       sidekiq (>= 5.0)
 
 GEM
