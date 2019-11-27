@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sidekiq/api'
+require 'sidekiq'
 
 require 'sidekiq/metrics/version'
 require 'sidekiq/metrics/adapter'

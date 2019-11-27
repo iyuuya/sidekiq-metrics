@@ -4,7 +4,7 @@ module Sidekiq
   module Metrics
     module Adapter
       class Base
-        def write
+        def write(worker_status)
           raise NotImplementedError, 'Subclasses must define `write`.'
         end
       end

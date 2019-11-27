@@ -5,10 +5,10 @@ require 'json'
 module Sidekiq
   module Metrics
     module Adapter
-      class SidekiqLogger < Base
+      class Logger < Base
         attr_accessor :logger
 
-        def initialize(logger = Sidekiq::Logging.logger)
+        def initialize(logger = Sidekiq.logger)
           @logger = logger
         end
 

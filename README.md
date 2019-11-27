@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ```ruby
 Sidekiq::Metrics.configure do |config|
-  config.adapter = Sidekiq::Metrics::Adapter::Logger.new(Sidekiq::Logging.logger)
+  config.adapter = Sidekiq::Metrics::Adapter::Logger.new(Sidekiq.logger)
   # config.adapter = Sidekiq::Metrics::Adapter::Logger.new(Rails.logger)
 end
 
