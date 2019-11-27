@@ -46,3 +46,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/iyuuya
 ## Code of Conduct
 
 Everyone interacting in the Sidekiq::Metrics project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/iyuuya/sidekiq-metrics/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+MIT License
