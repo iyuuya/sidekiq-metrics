@@ -130,5 +130,16 @@ RSpec.describe Sidekiq::Metrics::Middleware do
       expect(parsed_logs[0]).to_not have_key 'args'
       expect(parsed_logs[0]).to_not have_key 'created_at'
     end
+
+    context 'when worker includes in exclude list' do
+      it 'not records all meessages' do
+        allow(Sidekiq::Metrics.configuration).to receive(:excludes).and_return(Set.new(['TestWorker']))
+        middlewared(TestWorker, { 'queue' => 'excluded!!' }) {}
+        middlewared(TestWithQueueWorker, { 'queue' => 'not exlcuded!!' }) {}
+
+        expect(parsed_logs.count).to eq 1
+        expect(parsed_logs[0]['class']).to eq 'TestWithQueueWorker'
+      end
+    end
   end
 end

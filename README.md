@@ -20,16 +20,28 @@ Or install it yourself as:
 
 ## Configuration
 
+### Basic
+```ruby
+Sidekiq.configure_server do |config|
+  config.server_middleware do |chain|
+    chain.add Sidekiq::Metrics::Middleware
+  end
+end
+```
+
+### Adapter
 ```ruby
 Sidekiq::Metrics.configure do |config|
   config.adapter = Sidekiq::Metrics::Adapter::Logger.new(Sidekiq.logger)
   # config.adapter = Sidekiq::Metrics::Adapter::Logger.new(Rails.logger)
 end
+```
 
-Sidekiq.configure_server do |config|
-  config.server_middleware do |chain|
-    chain.add Sidekiq::Metrics::Middleware
-  end
+### Exclude worker
+```ruby
+Sidekiq::Metrics.configure do |config|
+  # Add worker name to excludes if you want to exclude
+  config.excludes << 'VeryLightWorker' # Please add `String`.
 end
 ```
 
