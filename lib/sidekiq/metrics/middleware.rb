@@ -3,28 +3,21 @@
 module Sidekiq
   module Metrics
     class Middleware
-      attr_accessor :msg
-
       def call(worker, msg, queue)
-        worker_status = { last_job_status: 'passed' }
+        worker_status = { status: 'passed' }
         start = Time.now
         yield
       rescue => e
-        worker_status[:last_job_status] = 'faield'
+        worker_status[:status] = 'failed'
         raise e
       ensure
         finish = Time.now
-        # worker_status[:queue]= msg['queue']
-        worker_status[:started_at] = start.utc.to_i
-        worker_status[:finished_at] = finish.utc.to_i
-        worker_status[:class] = msg['wrapped'] || worker.class.to_s
-        if worker_status[:class] == 'ActionMailer::DeliveryJob'
-          worker_status[:class] = msg['args'].first['arguments'].first
-        end
-
-        worker_status[:worker] = worker
-        worker_status[:msg] = msg
-        worker_status[:queue] = queue
+        worker_status[:queue]= msg['queue'] || queue
+        worker_status[:class] = worker.class.to_s
+        worker_status[:jid] = msg['jid']
+        worker_status[:enqueued_at] = msg['enqueued_at']
+        worker_status[:started_at] = start.to_f
+        worker_status[:finished_at] = finish.to_f
 
         save_entry_for_worker(worker_status)
       end
