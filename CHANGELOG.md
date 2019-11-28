@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.2.0 - 2019-11-27
+## 0.2.0 - 2019-11-28
 ### Added
 - #3 : excludes worker configuration
 - #5 : retried information to metrics
