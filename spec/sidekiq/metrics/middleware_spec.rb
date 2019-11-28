@@ -81,6 +81,16 @@ RSpec.describe Sidekiq::Metrics::Middleware do
       expect(parsed_logs.count).to eq 500
     end
 
+    it 'records retry' do
+      middlewared(TestWorker, { 'retry' => true }) {}
+      middlewared(TestWorker, { 'retry' => false }) {}
+      middlewared(TestWorker) {}
+
+      expect(parsed_logs[0]['retry']).to eq true
+      expect(parsed_logs[1]['retry']).to eq false
+      expect(parsed_logs[2]['retry']).to eq false
+    end
+
     it 'records class' do
       middlewared(TestWorker) {}
       middlewared(TestWithQueueWorker) {}

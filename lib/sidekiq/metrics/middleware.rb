@@ -24,6 +24,7 @@ module Sidekiq
         raise e
       ensure
         finish = Time.now
+        worker_status[:retry] = !!msg['retry']
         worker_status[:queue]= msg['queue'] || queue
         worker_status[:class] = worker.class.to_s
         worker_status[:jid] = msg['jid']
