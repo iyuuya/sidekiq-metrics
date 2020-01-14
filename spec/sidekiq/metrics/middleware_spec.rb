@@ -45,7 +45,7 @@ RSpec.describe Sidekiq::Metrics::Middleware do
     it 'records metrics for failed worker' do
       begin
         middlewared do
-          arise StandardError.new('failed')
+          raise StandardError.new('failed')
         end
       rescue
       end
@@ -57,7 +57,7 @@ RSpec.describe Sidekiq::Metrics::Middleware do
       middlewared {}
       begin
         middlewared do
-          arise StandardError.new('failed')
+          raise StandardError.new('failed')
         end
       rescue
       end
