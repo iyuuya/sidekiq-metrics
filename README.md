@@ -1,4 +1,5 @@
 # Sidekiq::Metrics
+[![Gem Version](https://badge.fury.io/rb/sidekiq-metrics.svg)](https://badge.fury.io/rb/sidekiq-metrics)
 
 Metrics about your workers of Sidekiq.
 
